@@ -62,6 +62,19 @@ const groupedPresets = {
   ),
 };
 
+function getGcd(a: number, b: number): number {
+  return b === 0 ? a : getGcd(b, a % b);
+}
+
+function getPresetTitle(width: number, height: number) {
+  const gcd = getGcd(width, height);
+  const ratio = `${width / gcd}:${height / gcd}`;
+  const orientation =
+    width > height ? "landscape" : width < height ? "portrait" : "square";
+
+  return `${width} × ${height} — ${ratio} ${orientation}`;
+}
+
 export default function PresetSelector({ recipe, onChange }: Props) {
   const presetRefs = useRef<Record<string, (HTMLButtonElement | null)[]>>({});
 
@@ -115,6 +128,7 @@ const handleArrowNavigation = (
   };
 
   return (
+
     <div className="space-y-6">
       {Object.entries(groupedPresets).map(([category, presets]) => {
         if (presets.length === 0) return null; // Skip empty categories
@@ -125,6 +139,7 @@ const handleArrowNavigation = (
               aria-label={`${category} presets`}
               className="text-xs font-bold text-[var(--muted)] px-1 uppercase tracking-wider"
             >
+             
               {category}
             </h2>
 
