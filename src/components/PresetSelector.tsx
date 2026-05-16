@@ -49,19 +49,6 @@ function RatioBox({
   );
 }
 
-const groupedPresets = {
-  Social: PRESETS.filter((p) =>
-    ["vertical-9-16", "instagram-4-5", "square-1-1"].includes(p.id),
-  ),
-  Video: PRESETS.filter((p) =>
-    ["landscape-16-9", "twitter-hd", "ultrawide-21-9"].includes(p.id),
-  ),
-  Cinema: PRESETS.filter((p) => ["cinema-scope", "dci-2k"].includes(p.id)),
-  Other: PRESETS.filter((p) =>
-    ["instagram-panoramic", "portrait-3-4"].includes(p.id),
-  ),
-};
-
 function getGcd(a: number, b: number): number {
   return b === 0 ? a : getGcd(b, a % b);
 }
@@ -74,6 +61,19 @@ function getPresetTitle(width: number, height: number) {
 
   return `${width} × ${height} — ${ratio} ${orientation}`;
 }
+
+const groupedPresets = {
+  Social: PRESETS.filter((p) =>
+    ["vertical-9-16", "instagram-4-5", "square-1-1"].includes(p.id),
+  ),
+  Video: PRESETS.filter((p) =>
+    ["landscape-16-9", "twitter-hd", "ultrawide-21-9"].includes(p.id),
+  ),
+  Cinema: PRESETS.filter((p) => ["cinema-scope", "dci-2k"].includes(p.id)),
+  Other: PRESETS.filter((p) =>
+    ["instagram-panoramic", "portrait-3-4"].includes(p.id),
+  ),
+};
 
 export default function PresetSelector({ recipe, onChange }: Props) {
   const presetRefs = useRef<Record<string, (HTMLButtonElement | null)[]>>({});
@@ -139,7 +139,8 @@ const handleArrowNavigation = (
               aria-label={`${category} presets`}
               className="text-xs font-bold text-[var(--muted)] px-1 uppercase tracking-wider"
             >
-             
+
+            
               {category}
             </h2>
 
